@@ -10,28 +10,17 @@ import codecs
 from scrapy.pipelines.images import ImagesPipeline
 from scrapy.exceptions import DropItem
 from scrapy import Request
-from scrapy import log
 
 class DoubanPipeline(object):
     def process_item(self, item, spider):
         return item    
 
-
 # 获取图片的管道
 class DoubanImgDownloadPipeline(ImagesPipeline):
-    default_headers = {
-        'accept': 'image/webp,image/*,*/*;q=0.8',
-        'accept-encoding': 'gzip, deflate, sdch, br',
-        'accept-language': 'zh-CN,zh;q=0.8,en;q=0.6',
-        'cookie': 'bid=yQdC/AzTaCw',
-        'referer': 'https://www.douban.com/photos/photo/2370443040/',
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
-    }
 
     def get_media_requests(self, item, info):
         for image_url in [item['cover']]:  # item['cover']的外面加上 []才会成为数组，才能去遍历
-            self.default_headers['referer'] = image_url
-            yield Request(image_url, headers=self.default_headers)
+            yield Request(image_url)
 
     def item_completed(self, results, item, info):
         #在這通過debug可以看到results裏數據,分下載圖片成功和下載失敗兩種情況.

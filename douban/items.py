@@ -28,5 +28,4 @@ class DoubanItem(scrapy.Item):
     # 电影的封面
     cover = scrapy.Field()
     image_paths = scrapy.Field()
-    images = scrapy.Field()
     pass

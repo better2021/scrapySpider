@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+# images文件夹不传到git上去
+/images/  
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
