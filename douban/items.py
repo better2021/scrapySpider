@@ -4,6 +4,7 @@
 #
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
+# 此文件中是需要爬虫爬取的目标
 
 import scrapy
 
@@ -26,4 +27,6 @@ class DoubanItem(scrapy.Item):
     descript = scrapy.Field()
     # 电影的封面
     cover = scrapy.Field()
+    image_paths = scrapy.Field()
+    images = scrapy.Field()
     pass

@@ -21,7 +21,8 @@ FEED_EXPORT_ENCODING = 'utf-8' # 设置为utf-8编码，这样保存中文的数
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+#ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False # 无视robots协议
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -54,9 +55,10 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'douban.middlewares.DoubanDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'douban.middlewares.DoubanDownloaderMiddleware': 543,
+   'douban.middlewares.myUserAgent':544 # 用户代理
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -66,9 +68,18 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
+# 开启pipeline才能将数据保存到数据库
 ITEM_PIPELINES = {
    'douban.pipelines.DoubanPipeline': 300,
+   'douban.pipelines.DoubanImgDownloadPipeline':1 # 图片下载管道
 }
+IMAGES_STORE = 'images' # 储存图片的文件夹
+IMAGES_THUMBS = {  #缩略小图和大图的尺寸设置
+    'small':(50,50),
+    'big':(270,270),
+}
+# 90 天的图片失效期限
+IMAGES_EXPIRES = 90
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
