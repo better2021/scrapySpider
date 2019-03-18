@@ -1,7 +1,7 @@
 .DS_Store
 node_modules/
 # images文件夹不传到git上去
-/images/  
+*/images/  
 
 # Editor directories and files
 .idea
