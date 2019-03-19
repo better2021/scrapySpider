@@ -7,6 +7,7 @@
 
 from scrapy import signals
 import random
+import base64
 
 class PixivSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -102,6 +103,14 @@ class PixivDownloaderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
+# 设置代理ip（反爬虫）
+class myProxy(object):
+    def process_request(self,request,spider):
+        request.meta['proxy'] = 'http-cla.abuyun.com:9030' 
+        # proxy_name_pass = b'H211EATS905745KC:F8FFBC929EB7D5A7'
+        proxy_name_pass = b'H70X4623765VO39C:571EF247DD5207BA'
+        encode_pass_name = base64.b64encode(proxy_name_pass)
+        request.headers['Proxy-Authorization'] = 'Basic ' + encode_pass_name.decode()
 
 # 设置随机user Agent,可以把爬虫隐藏得更好（反爬虫技术）：代理与随机agent
 class myUserAgent(object):

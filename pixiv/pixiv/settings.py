@@ -17,11 +17,11 @@ NEWSPIDER_MODULE = 'pixiv.spiders'
 FEED_EXPORT_ENCODING = 'utf-8' # 设置为utf-8编码，这样保存中文的数据就不会出现unicode码了
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
+# 接口的header头中的信息user-agent
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False #忽略robots的rules 规则
+ROBOTSTXT_OBEY = False # 忽略robots的rules 规则
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -29,7 +29,7 @@ ROBOTSTXT_OBEY = False #忽略robots的rules 规则
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 0.5 # 下载延迟
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -56,7 +56,8 @@ ROBOTSTXT_OBEY = False #忽略robots的rules 规则
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    'pixiv.middlewares.PixivDownloaderMiddleware': 543,
-   'pixiv.middlewares.myUserAgent':544 # 随机的请求header
+   'pixiv.middlewares.myUserAgent':544, # 随机的请求header
+   'pixiv.middlewares.myProxy':540  # 代理ip
 }
 
 # Enable or disable extensions
@@ -73,10 +74,6 @@ ITEM_PIPELINES = {
 }
 
 IMAGES_STORE = 'images'   #存储图片的文件夹位置
-IMAGES_THUMBS = {  #缩略小图和大图的尺寸设置
-    'small':(50,50),
-    'big':(270,270),
-}
 # 90天的图片失效期限
 IMAGES_EXPIRES = 90
 
