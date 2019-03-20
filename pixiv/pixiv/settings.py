@@ -57,7 +57,7 @@ DOWNLOAD_DELAY = 0.5 # 下载延迟
 DOWNLOADER_MIDDLEWARES = {
    'pixiv.middlewares.PixivDownloaderMiddleware': 543,
    'pixiv.middlewares.myUserAgent':544, # 随机的请求header
-   'pixiv.middlewares.myProxy':540  # 代理ip
+   # 'pixiv.middlewares.myProxy':540  # 代理ip
 }
 
 # Enable or disable extensions
